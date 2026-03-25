@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Memo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <h1>Special Memo</h1>
+        <p>Simple, practical, private notes.</p>
+      </header>
+
+      <div class="app-layout">
+        <aside class="sidebar">
+          <button id="newMemoBtn" class="primary-btn">+ New Memo</button>
+          <input id="searchInput" type="search" placeholder="Search memos..." />
+          <ul id="memoList" class="memo-list"></ul>
+        </aside>
+
+        <main class="editor-pane">
+          <section id="emptyState" class="center-state">
+            <h2>No memo selected</h2>
+            <p>Create or choose a memo from the list.</p>
+          </section>
+
+          <section id="lockedState" class="center-state hidden">
+            <h2>This memo is locked</h2>
+            <p>Unlock with password or Face ID / biometrics.</p>
+            <div class="unlock-controls">
+              <input
+                id="unlockPasswordInput"
+                type="password"
+                placeholder="Enter password"
+                autocomplete="current-password"
+              />
+              <button id="unlockPasswordBtn" class="primary-btn">
+                Unlock with Password
+              </button>
+              <button id="unlockBiometricBtn" class="secondary-btn hidden">
+                Unlock with Face ID / Biometrics
+              </button>
+            </div>
+            <p id="unlockMessage" class="message"></p>
+          </section>
+
+          <section id="editorState" class="hidden">
+            <div class="editor-toolbar">
+              <button id="lockMemoBtn" class="secondary-btn">Lock Memo</button>
+              <button id="relockMemoBtn" class="secondary-btn hidden">
+                Relock
+              </button>
+              <button id="removeLockBtn" class="secondary-btn hidden">
+                Remove Lock
+              </button>
+              <button id="deleteMemoBtn" class="danger-btn">Delete</button>
+            </div>
+            <input id="titleInput" type="text" placeholder="Title" />
+            <textarea id="contentInput" placeholder="Write your memo..."></textarea>
+            <p id="editorMessage" class="message"></p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="lockModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <h3>Lock this memo</h3>
+        <p>
+          Set a password for this memo. You can optionally enable Face ID /
+          biometrics on this device.
+        </p>
+        <label for="lockPasswordInput">Password</label>
+        <input
+          id="lockPasswordInput"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Password"
+        />
+        <label for="confirmLockPasswordInput">Confirm password</label>
+        <input
+          id="confirmLockPasswordInput"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Confirm password"
+        />
+        <label class="checkbox-row">
+          <input id="enableBiometricInput" type="checkbox" />
+          Enable Face ID / biometrics for this memo
+        </label>
+        <p class="small-note">
+          For local-only apps, browsers require one password unlock after page
+          refresh before biometric unlock can be used again.
+        </p>
+        <p id="lockModalMessage" class="message"></p>
+        <div class="modal-actions">
+          <button id="cancelLockBtn" class="secondary-btn">Cancel</button>
+          <button id="confirmLockBtn" class="primary-btn">Save Lock</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
